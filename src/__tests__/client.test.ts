@@ -108,7 +108,6 @@ describe("ApiClient.share", () => {
     const payload: ShareResponse = {
       recipient: "friend@example.com",
       article_url: "https://e/ka-1",
-      delivered_via: "console",
     };
     const fetchMock = vi.fn().mockResolvedValue(jsonResponse(payload));
     const client = makeClient(fetchMock as unknown as typeof fetch);

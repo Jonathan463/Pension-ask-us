@@ -102,7 +102,7 @@ export function ShareForm({ question, article }: Props) {
 
       {status.kind === "success" && (
         <div className="alert alert--ok" role="status">
-          Sent to {status.result.recipient} via {status.result.delivered_via}.
+          Email sent to {status.result.recipient}.
         </div>
       )}
 

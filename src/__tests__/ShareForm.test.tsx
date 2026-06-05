@@ -19,7 +19,6 @@ describe("ShareForm", () => {
     const share = vi.spyOn(apiClient, "share").mockResolvedValue({
       recipient: "friend@example.com",
       article_url: article.url,
-      delivered_via: "console",
     });
     const user = userEvent.setup();
 
@@ -32,7 +31,7 @@ describe("ShareForm", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/sent to friend@example.com via console/i),
+        screen.getByText(/email sent to friend@example.com/i),
       ).toBeInTheDocument();
     });
     expect(share).toHaveBeenCalledTimes(1);

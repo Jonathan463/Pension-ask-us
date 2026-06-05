@@ -29,7 +29,6 @@ export interface ShareRequest {
 export interface ShareResponse {
   recipient: string;
   article_url: string;
-  delivered_via: string;
 }
 
 export interface IngestRequest {
