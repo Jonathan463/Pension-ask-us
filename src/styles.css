@@ -145,51 +145,113 @@ body {
   font-size: 15px;
 }
 
-.sources {
+.top-article {
   border-top: 1px solid var(--border);
   padding-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
 }
 
-.sources__heading {
-  margin: 0 0 8px;
+.top-article__heading {
+  margin: 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  flex-basis: 100%;
+}
+
+.top-article__link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.top-article__link:hover {
+  text-decoration: underline;
+}
+
+.top-article__score {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.share-form {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.share-form__heading {
+  margin: 0;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted);
 }
 
-.sources__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.share-form__hint {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
-.sources__item {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: baseline;
-}
-
-
-.sources__link {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.sources__link:hover {
-  text-decoration: underline;
-}
-
-.sources__score {
-  font-variant-numeric: tabular-nums;
+.share-form__label {
   font-size: 13px;
   color: var(--muted);
 }
+
+.share-form__input,
+.share-form__textarea {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  font: inherit;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.share-form__textarea {
+  resize: vertical;
+  min-height: 56px;
+}
+
+.share-form__input:focus,
+.share-form__textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.18);
+}
+
+.share-form__submit {
+  align-self: flex-start;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.share-form__submit:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.share-form__submit:disabled {
+  background: #c7d2fe;
+  border-color: #c7d2fe;
+  cursor: not-allowed;
+}
+
 
 .alert {
   border-radius: var(--radius);
