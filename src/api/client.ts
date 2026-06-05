@@ -5,6 +5,8 @@ import type {
   HealthResponse,
   IngestRequest,
   IngestResponse,
+  ShareRequest,
+  ShareResponse,
 } from "./types";
 
 const DEFAULT_BASE_URL = "http://127.0.0.1:8000";
@@ -56,6 +58,10 @@ export class ApiClient {
 
   async ingest(payload: IngestRequest = {}): Promise<IngestResponse> {
     return this.request<IngestResponse>("POST", "/ingest", payload);
+  }
+
+  async share(payload: ShareRequest): Promise<ShareResponse> {
+    return this.request<ShareResponse>("POST", "/share", payload);
   }
 
   private async request<T>(
