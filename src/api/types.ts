@@ -15,6 +15,21 @@ export interface AskResponse {
   question: string;
   answer: string;
   sources: Source[];
+  top_source?: Source | null;
+}
+
+export interface ShareRequest {
+  recipient: string;
+  question: string;
+  article_title: string;
+  article_url: string;
+  note?: string | null;
+}
+
+export interface ShareResponse {
+  recipient: string;
+  article_url: string;
+  delivered_via: string;
 }
 
 export interface IngestRequest {
