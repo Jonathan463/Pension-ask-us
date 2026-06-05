@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { ApiClient, ApiError } from "../api/client";
-import type { ApiErrorBody, AskResponse } from "../api/types";
+import type { ApiErrorBody, AskResponse, ShareResponse } from "../api/types";
 
 function jsonResponse(body: unknown, init: ResponseInit = {}): Response {
   return new Response(JSON.stringify(body), {
@@ -20,6 +20,7 @@ describe("ApiClient.ask", () => {
       question: "How much do I contribute?",
       answer: "Based on 1 article...",
       sources: [{ title: "KA-1", url: "https://example/ka-1", score: 0.91 }],
+      top_source: { title: "KA-1", url: "https://example/ka-1", score: 0.91 },
     };
     const fetchMock = vi.fn().mockResolvedValue(jsonResponse(payload));
     const client = makeClient(fetchMock as unknown as typeof fetch);
@@ -99,6 +100,53 @@ describe("ApiClient.ingest", () => {
     expect(error).toBeInstanceOf(ApiError);
     expect(error.code).toBe("ingestion_failed");
     expect(error.details).toEqual({ requested_urls: 1 });
+  });
+});
+
+describe("ApiClient.share", () => {
+  it("POSTs to /share and returns the parsed ShareResponse", async () => {
+    const payload: ShareResponse = {
+      recipient: "friend@example.com",
+      article_url: "https://e/ka-1",
+      delivered_via: "console",
+    };
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(payload));
+    const client = makeClient(fetchMock as unknown as typeof fetch);
+
+    const result = await client.share({
+      recipient: "friend@example.com",
+      question: "What is annual allowance?",
+      article_title: "Annual Allowance",
+      article_url: "https://e/ka-1",
+      note: "Have a read.",
+    });
+
+    expect(result).toEqual(payload);
+    const [url, init] = fetchMock.mock.calls[0];
+    expect(url).toBe("http://test.local/share");
+    expect(init.method).toBe("POST");
+    expect(JSON.parse(init.body as string).recipient).toBe("friend@example.com");
+  });
+
+  it("wraps invalid_email 400 in ApiError", async () => {
+    const body: ApiErrorBody = {
+      error: "invalid_email",
+      message: "Recipient email address is not valid.",
+      details: { recipient: "nope" },
+    };
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(body, { status: 400 }));
+    const client = makeClient(fetchMock as unknown as typeof fetch);
+
+    const error = await client
+      .share({
+        recipient: "nope",
+        question: "x?",
+        article_title: "t",
+        article_url: "u",
+      })
+      .catch((e) => e);
+    expect(error).toBeInstanceOf(ApiError);
+    expect(error.code).toBe("invalid_email");
   });
 });
 
