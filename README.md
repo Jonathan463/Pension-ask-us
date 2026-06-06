@@ -35,7 +35,7 @@ src/
 
 ### Prerequisites
 - Node.js 20+ (the Docker image uses `node:20-alpine`)
-- A running backend (see [`pension-ask-us-backend`]((https://github.com/Jonathan463/Pension-ask-us-backend))) reachable at
+- A running backend (see [`pension-ask-us-backend`](https://github.com/Jonathan463/Pension-ask-us-backend)) reachable at
   the URL in `.env.local`
 
 ### Local development
@@ -97,7 +97,7 @@ the bundle. `nginx.conf` adds an SPA history fallback and immutable
 ## Backend
 
 This SPA targets the FastAPI service in
-**[`pension-ask-us`](../pension-ask-us)**. Endpoints used:
+**[`pension-ask-us`](https://github.com/Jonathan463/Pension-ask-us-backend)**. Endpoints used:
 
 - `GET /health` — header status badge
 - `POST /ask` — ask form + answer panel
