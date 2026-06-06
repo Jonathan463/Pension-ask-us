@@ -35,7 +35,7 @@ src/
 
 ### Prerequisites
 - Node.js 20+ (the Docker image uses `node:20-alpine`)
-- A running backend (see [`pension-ask-us`](../pension-ask-us)) reachable at
+- A running backend (see [`pension-ask-us`]([../pension-ask-us](https://github.com/Jonathan463/Pension-ask-us-backend))) reachable at
   the URL in `.env.local`
 
 ### Local development
